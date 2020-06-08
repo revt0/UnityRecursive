@@ -8,12 +8,13 @@ public class RoomManager : MonoBehaviour
     public GameObject spawnTile;
     public GameObject endTile;
     public GameObject roomTile;
-
+    public int mapLength;
     public List<RoomTile> rooms;
     // Start is called before the first frame update
     void Start()
     {
-        
+        mapLength = 10;
+        init();
     }
 
     // Update is called once per frame
@@ -24,13 +25,22 @@ public class RoomManager : MonoBehaviour
 
     private void init()
     {
-
+        GameObject curr = SpawnRoom(new Vector3(0f, 0f, 0f), true, 0);
+        Transform connectP;
+        for (int i =0; i< mapLength;++i)
+        {
+            connectP = curr.GetComponent<Transform>().Find("ConnectPoint");
+            SpawnRoom(connectP.position, true, 2);
+                
+        }
+        connectP = curr.GetComponent<Transform>().Find("ConnectPoint");
+        SpawnRoom(connectP.position, true, 1);
     }
 
     //type 0 = start area
     //type 1 = end area
     //type 2 = random
-    private void SpawnRoom(Vector3 vectPos, bool needS, int dirNeed, int type)
+    private GameObject SpawnRoom(Vector3 vectPos, bool needS, int type)
     {
         GameObject tempTile = spawnTile;
         switch (type)
@@ -48,6 +58,7 @@ public class RoomManager : MonoBehaviour
         }
         RoomTile tempRT = new RoomTile();
         tempRT.setVars(vectPos, needS, tempTile, this);
-        Instantiate(roomTile, vectPos, Quaternion.identity);
+        return Instantiate(roomTile, vectPos, Quaternion.identity);
+        
     }
 }
