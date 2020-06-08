@@ -10,11 +10,32 @@ public class RoomTile : MonoBehaviour
      * 3 ->  left
      * 4 ->  right
      */
+    private RoomManager roomManager;
+    private GameObject prevConnect;
+    private GameObject currConnect;
     private Vector3 vectPosition;
+    private GameObject tile;
     private bool needsSpawn;
-    private int dirNeeded;
 
 
+    public void setVars(Vector3 vectPos, bool needS, GameObject aTile, RoomManager roomMan)
+    {
+        roomManager = roomMan;
+        vectPosition = vectPos;
+        needsSpawn = needS;
+        tile = aTile;
+    }
+
+    public void init()
+    {
+        //transform.position = vectPosition;
+        spawnTile();
+    }
+
+    public void spawnTile()
+    {
+        Instantiate(tile, vectPosition, Quaternion.identity);
+    }
     // Start is called before the first frame update
     void Start()
     {

@@ -8,6 +8,8 @@ TagManager:
   - Rooms
   - SpawnRoom
   - RoomTile
+  - Spawn Point
+  - Finish Zone
   layers:
   - Default
   - TransparentFX
