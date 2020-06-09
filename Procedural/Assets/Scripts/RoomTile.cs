@@ -11,8 +11,8 @@ public class RoomTile : MonoBehaviour
      * 4 ->  right
      */
     private RoomManager roomManager;
-    private GameObject prevConnect;
-    private GameObject currConnect;
+    private Transform prevConnect;
+    private Transform currConnect;
     private Vector3 vectPosition;
     private GameObject tile;
     private bool needsSpawn;
@@ -20,13 +20,14 @@ public class RoomTile : MonoBehaviour
 
     public void setVars(Vector3 vectPos, bool needS, GameObject aTile, RoomManager roomMan)
     {
+
         roomManager = roomMan;
         vectPosition = vectPos;
         needsSpawn = needS;
         tile = aTile;
     }
 
-    public void init()
+    public void Init()
     {
         //transform.position = vectPosition;
         spawnTile();
@@ -34,12 +35,19 @@ public class RoomTile : MonoBehaviour
 
     public void spawnTile()
     {
-        Instantiate(tile, vectPosition, Quaternion.identity);
+        
+        GameObject temp = Instantiate(tile, transform);
+        currConnect = temp.GetComponentInChildren<Transform>().Find("ConnectPoint");
     }
     // Start is called before the first frame update
+
+    public Transform getConnect()
+    {
+        return currConnect;
+    }
     void Start()
     {
-        
+        //Init();
     }
 
     // Update is called once per frame

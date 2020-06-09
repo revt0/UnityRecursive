@@ -10,11 +10,13 @@ public class RoomManager : MonoBehaviour
     public GameObject roomTile;
     public int mapLength;
     public List<RoomTile> rooms;
+    public int seed;
     // Start is called before the first frame update
     void Start()
     {
+        Random.InitState(seed);
         mapLength = 10;
-        init();
+        Init();
     }
 
     // Update is called once per frame
@@ -23,18 +25,19 @@ public class RoomManager : MonoBehaviour
         
     }
 
-    private void init()
+    private void Init()
     {
         GameObject curr = SpawnRoom(new Vector3(0f, 0f, 0f), true, 0);
         Transform connectP;
         for (int i =0; i< mapLength;++i)
         {
-            connectP = curr.GetComponent<Transform>().Find("ConnectPoint");
-            SpawnRoom(connectP.position, true, 2);
-                
+            connectP = curr.GetComponent<RoomTile>().getConnect();
+            //Debug.Log("currP: " + connectP.name + " " + connectP.position);
+            curr = SpawnRoom(connectP.position, true, 2);
         }
-        connectP = curr.GetComponent<Transform>().Find("ConnectPoint");
-        SpawnRoom(connectP.position, true, 1);
+        connectP = curr.GetComponent<RoomTile>().getConnect();
+        curr = SpawnRoom(connectP.position, true, 1);
+
     }
 
     //type 0 = start area
@@ -52,13 +55,14 @@ public class RoomManager : MonoBehaviour
                 tempTile = endTile;
                 break;
             case 2:
-                int index = Random.Range(0,Tiles.Length);
+                int index = Random.Range(0, Tiles.Length);
                 tempTile = Tiles[index];
                 break;
         }
-        RoomTile tempRT = new RoomTile();
-        tempRT.setVars(vectPos, needS, tempTile, this);
-        return Instantiate(roomTile, vectPos, Quaternion.identity);
+        GameObject tempRT = Instantiate(roomTile, vectPos, Quaternion.identity);
+        tempRT.GetComponent<RoomTile>().setVars(vectPos, needS, tempTile, this);
+        tempRT.GetComponent<RoomTile>().Init();
+        return tempRT;
         
     }
 }
