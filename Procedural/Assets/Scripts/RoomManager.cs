@@ -9,13 +9,16 @@ public class RoomManager : MonoBehaviour
     public GameObject endTile;
     public GameObject roomTile;
     public int mapLength;
+    public bool randomSeed;
     public List<RoomTile> rooms;
     public int seed;
     // Start is called before the first frame update
     void Start()
     {
+
+        if(randomSeed)
+            seed = Random.Range(-100000000,100000000);
         Random.InitState(seed);
-        mapLength = 10;
         Init();
     }
 
@@ -27,23 +30,23 @@ public class RoomManager : MonoBehaviour
 
     private void Init()
     {
-        GameObject curr = SpawnRoom(new Vector3(0f, 0f, 0f), true, 0);
+        GameObject curr = SpawnRoom(new Vector3(0f, 0f, 0f), Quaternion.identity, true, 0);
         Transform connectP;
         for (int i =0; i< mapLength;++i)
         {
             connectP = curr.GetComponent<RoomTile>().getConnect();
             //Debug.Log("currP: " + connectP.name + " " + connectP.position);
-            curr = SpawnRoom(connectP.position, true, 2);
+            curr = SpawnRoom(connectP.position, connectP.rotation, true, 2);
         }
         connectP = curr.GetComponent<RoomTile>().getConnect();
-        curr = SpawnRoom(connectP.position, true, 1);
+        curr = SpawnRoom(connectP.position, connectP.rotation, true, 1);
 
     }
 
     //type 0 = start area
     //type 1 = end area
     //type 2 = random
-    private GameObject SpawnRoom(Vector3 vectPos, bool needS, int type)
+    private GameObject SpawnRoom(Vector3 vectPos, Quaternion quatPos, bool needS, int type)
     {
         GameObject tempTile = spawnTile;
         switch (type)
@@ -59,7 +62,7 @@ public class RoomManager : MonoBehaviour
                 tempTile = Tiles[index];
                 break;
         }
-        GameObject tempRT = Instantiate(roomTile, vectPos, Quaternion.identity);
+        GameObject tempRT = Instantiate(roomTile, vectPos, quatPos);
         tempRT.GetComponent<RoomTile>().setVars(vectPos, needS, tempTile, this);
         tempRT.GetComponent<RoomTile>().Init();
         return tempRT;

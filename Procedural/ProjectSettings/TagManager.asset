@@ -10,6 +10,7 @@ TagManager:
   - RoomTile
   - Spawn Point
   - Finish Zone
+  - Kill Box
   layers:
   - Default
   - TransparentFX
