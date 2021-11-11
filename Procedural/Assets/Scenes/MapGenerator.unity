@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.29466596, g: 0.061353475, b: 0.00091536593, a: 1}
+  m_IndirectSpecularColor: {r: 0.30799583, g: 0.06353048, b: 0.0008744863, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -2175,7 +2175,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh-27362
+  m_Name: pb_Mesh-31104
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -2882,7 +2882,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh-27390
+  m_Name: pb_Mesh-31100
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -3313,6 +3313,17 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 976644815765641400, guid: 2b3f1d193a8ba0f4d9977ed3c99cfcad,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 48d6d7d20d574aa42bd7e0b079972791, type: 2}
+    - target: {fileID: 993797027187372112, guid: 2b3f1d193a8ba0f4d9977ed3c99cfcad,
+        type: 3}
+      propertyPath: pickupGO
+      value: 
+      objectReference: {fileID: 1152489015262913103, guid: 4f06cbdc7ac029e468af99bfcba1b417,
+        type: 3}
     - target: {fileID: 1641161280446998225, guid: 2b3f1d193a8ba0f4d9977ed3c99cfcad,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -3465,7 +3476,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh-27376
+  m_Name: pb_Mesh-31102
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
